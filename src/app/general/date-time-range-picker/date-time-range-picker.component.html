@@ -1,0 +1,54 @@
+<form [formGroup]="dateTimePickerForm">
+    <div class="row">
+      <div class="col-8 col-sm-4 col-md-4 col-lg-2 col-xl-2 offset-lg-1 offset-xl-1">
+        <mat-form-field>
+          <input matInput [max]="startDateMax" [matDatepicker]="startDt" placeholder="Select Start Date" formControlName="startDate" (focus)="startDt.open()" (dateChange)="startDateChanged()">
+          <mat-datepicker-toggle matSuffix [for]="startDt"></mat-datepicker-toggle>
+          <mat-datepicker [touchUi]="isMobileDisplay()" #startDt></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-2 col-sm-1 col-md-1 col-lg-1 col-xl-1 pr-0" *ngIf="showTime">
+        <mat-form-field>
+          <mat-select placeholder="Hr." formControlName="startTimeHr">
+            <mat-option *ngFor="let hr of hoursToShow" [value]="hr">{{ hr | number: '2.0-0' }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-2 col-sm-1 col-md-1 col-lg-1 col-xl-1 pl-0" *ngIf="showTime">
+        <mat-form-field>
+          <mat-select placeholder="Min." formControlName="startTimeMin">
+            <mat-option *ngFor="let min of minsToShow" [value]="min">{{ min | number: '2.0-0' }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-8 col-sm-4 col-md-4 col-lg-2 col-xl-2 offset-lg-1 offset-xl-1">
+        <mat-form-field>
+          <input matInput [min]="endDateMin" [max]="endDateMax" [matDatepicker]="endDt" placeholder="Select End Date" formControlName="endDate" (focus)="endDt.open()" (dateChange)="endDateChanged()">
+          <mat-datepicker-toggle matSuffix [for]="endDt"></mat-datepicker-toggle>
+          <mat-datepicker [touchUi]="isMobileDisplay()" #endDt></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-2 col-sm-1 col-md-1 col-lg-1 col-xl-1 pr-0" *ngIf="showTime">
+          <mat-form-field>
+            <mat-select placeholder="Hr." formControlName="endTimeHr">
+              <mat-option *ngFor="let hr of hoursToShow" [value]="hr">{{ hr | number: '2.0-0' }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2 col-sm-1 col-md-1 col-lg-1 col-xl-1 pl-0" *ngIf="showTime">
+          <mat-form-field>
+            <mat-select placeholder="Min." formControlName="endTimeMin">
+              <mat-option *ngFor="let min of minsToShow" [value]="min">{{ min | number: '2.0-0' }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      <div class="col-lg-2 col-xl-2 mb-2 mb-sm-0">
+        <button mat-icon-button color="accent" matTooltip="Set Date!" matTooltipPosition="below" (click)="setDate()" class="float-right float-sm-none">
+          <mat-icon aria-label="Set Date">done</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Reset Date!" matTooltipPosition="below" (click)="resetDate()" class="float-right float-sm-none">
+          <mat-icon aria-label="Reset Date">refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>

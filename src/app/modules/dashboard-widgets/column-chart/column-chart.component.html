@@ -1,0 +1,44 @@
+<div [ngClass]="{'row': isMobileDisplay() }">
+  <div class="col-12" mwlDraggable [dragAxis]="dragAxis" [style.top.px]="isMobileDisplay() ? null : config.position?.x"
+    [style.left.px]="isMobileDisplay() ? null : config.position?.y" (dragEnd)="dragEnd($event)"
+    [ngClass]="{'pull-left': !isPreview, 'element': !isPreview && !isMobileDisplay(), 'card-sm': !isPreview && !isMobileDisplay() && widgetSize.toUpperCase() == 'S', 'card-md': !isPreview && !isMobileDisplay() && widgetSize.toUpperCase() == 'M', 'card-lg': !isPreview && !isMobileDisplay() && widgetSize.toUpperCase() == 'L'}">
+    <h5 class="text-center" *ngIf="isPreview">Widget Preview</h5>
+    <div class="card">
+      <div class="card-header card-header-icon card-header-primary">
+        <div class="card-icon">
+          <i class="material-icons">multiline_chart</i>
+        </div>
+        <h4 class="card-title"> Applications
+          <widget-options-menu *ngIf="!isPreview" [menuItems]="widgetMenuOptions"
+            (onMenuItemClicked)="handleWidgetAction($event)"></widget-options-menu>
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="" id="dateTimeCollapse">
+          <date-time-range-picker #datePicker [showTime]="sources[selectedChart].dataDuration == 1" [duration]="sources[selectedChart].dataDuration" (onDateSet)="onDateSet($event)"
+            (onDateReset)="onDateReset($event)"></date-time-range-picker>
+        </div>
+        <ul class="nav nav-pills nav-pills-primary" role="tablist" *ngIf="sources.length > 1">
+          <li class="nav-item" *ngFor="let item of sources;index as $index">
+            <a class="nav-link" (click)="setSelectedChart($index)" [ngClass]="{'active': $index == 0}" data-toggle="tab"
+              href="javascript:;" role="tablist">
+              {{ item.tabText }}
+            </a>
+          </li>
+        </ul>
+        <highcharts-chart class="mt-2" [Highcharts]="Highcharts"
+          [options]="chartOptions" *ngIf="!showChartLoader; else chartLoader"></highcharts-chart>
+        <ng-template #chartLoader>
+          <div class="row">
+            <div class="col-12" align="center">
+              <h4>
+                <mat-spinner mode="indeterminate" color="primary" [diameter]=30></mat-spinner>
+                Fetching Chart Data ...
+              </h4>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

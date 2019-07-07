@@ -1,0 +1,7 @@
+::ng-deep .color-picker {
+    top: -115px !important;
+}
+
+::ng-deep .color-picker > .arrow.arrow-right, .arrow.arrow-left {
+    display: none !important;
+}

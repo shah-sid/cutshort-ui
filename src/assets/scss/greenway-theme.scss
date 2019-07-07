@@ -1,0 +1,90 @@
+$greenway-primary: (
+    50 : #e6e8ea,
+    100 : #c1c6cb,
+    200 : #97a0a8,
+    300 : #6d7985,
+    400 : #4e5d6a,
+    500 : #2f4050,
+    600 : #2a3a49,
+    700 : #233240,
+    800 : #1d2a37,
+    900 : #121c27,
+    A100 : #68afff,
+    A200 : #3594ff,
+    A400 : #0279ff,
+    A700 : #006de8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$greenway-accent: (
+    50 : #e0f7fa,
+    100 : #b3ebf2,
+    200 : #80deea,
+    300 : #4dd0e1,
+    400 : #26c6da,
+    500 : #00bcd4,
+    600 : #00b6cf,
+    700 : #00adc9,
+    800 : #00a5c3,
+    900 : #0097b9,
+    A100 : #e2f9ff,
+    A200 : #afeeff,
+    A400 : #7ce3ff,
+    A700 : #63ddff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+@import '~@angular/material/_theming';
+
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define a theme.
+$custom-primary: mat-palette($greenway-primary);
+$custom-accent:  mat-palette($greenway-accent);
+
+$custom-theme: mat-light-theme($custom-primary, $custom-accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($custom-theme);
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Noto Sans, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 400)
+);
+
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);

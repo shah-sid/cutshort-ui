@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg bg-primary navbar-transparent navbar-absolute" color-on-scroll="500">
+  <div class="container">
+    <div class="navbar-wrapper">
+      <a class="navbar-brand" [routerLink]="['/login']" *ngIf="orgHost?.indexOf('paulshantanu') == -1">{{ (userOrganisation$ | async).name.split(' ')[0] }} I/O Sense</a>
+      <a class="navbar-brand" [routerLink]="['/login']" *ngIf="orgHost?.indexOf('paulshantanu') != -1">
+        <img class="chrome-logo" src="../../../assets/img/CHROME LOGO.png" alt="chrome-logo">
+      </a>
+    </div>
+    <div class="justify-content-end">
+      <ul class="navbar-nav">
+        <li [hidden]="currentUrl.indexOf('/login') != -1 || currentUrl == '/'" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/login']">
+            <i class="material-icons">fingerprint</i> Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

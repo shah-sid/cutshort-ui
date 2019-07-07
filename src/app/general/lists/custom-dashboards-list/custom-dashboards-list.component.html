@@ -1,0 +1,60 @@
+<div *ngIf="showCustomDashboardsLoader === true; then customDashboardsLoader else customDashboardsList"></div>
+<ng-template #customDashboardsLoader>
+  <report-placeholder count="4"></report-placeholder>
+</ng-template>
+<ng-template #customDashboardsList>
+  <div class="row" *ngFor="let customDashboardGroup of groupedCustomDashboards">
+    <div class="col-12">
+      <h6 class="mb-0 mt-3">{{ customDashboardGroup.type }}</h6>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 animated fadeIn" *ngFor="let customDashboard of customDashboardGroup.customDashboards; index as $index">
+          <div class="card" (click)="viewCustomDashboardClicked(customDashboard)" [ngClass]="{'mat-elevation-z7': customDashboard?._id == customDashboardHover?._id }"
+            (mouseenter)="customDashboardHover = customDashboard" (mouseleave)="customDashboardHover = null">
+            <div class="card-body">
+              <div class="row">
+                <!-- <div class="col-2">
+                  <img src="../../../../../assets/img/essentials/.svg" alt="customDashboard-icon" class="dash-icon">
+                </div> -->
+                <div class="col-12">
+                  <h4 [matTooltip]="customDashboard.dashboardID" matTooltipPosition="below" class="title-text text-overflow-ellipsis">{{
+                    customDashboard.dashboardID }}</h4>
+                </div>
+              </div>
+              <p class="mb-0 mt-1 desc-divider">Description</p>
+              <mat-divider></mat-divider>
+              <p class="text-truncate mb-0" [matTooltip]="customDashboard.description">{{ customDashboard.description }}</p>
+            </div>
+            <div class="card-footer">
+              <div class="button-row">
+                <button matTooltip="CustomDashboard Config" matTooltipPosition="below" mat-icon-button color="primary" (click)="configureCustomDashboardClicked($event, customDashboard)">
+                  <mat-icon aria-label="CustomDashboard Config">settings</mat-icon>
+                </button>
+                <button matTooltip="Delete CustomDashboard" matTooltipPosition="below" class="pull-right" mat-icon-button color="warn"
+                  (click)="deleteCustomDashboardClicked($event, customDashboard._id)">
+                  <mat-icon aria-label="Delete CustomDashboard">delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="groupedCustomDashboards.length == 0">
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-primary">
+            <div class="card-icon">
+              <i class="material-icons">dashboard</i>
+            </div>
+            <h4 class="card-title">Manage Custom Dashboards</h4>
+          </div>
+          <div class="card-body">
+            <h4 align="center"><span>No custom dashboards found!</span></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

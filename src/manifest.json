@@ -1,0 +1,14 @@
+{
+  "name": "Faclon Labs",
+  "short_name": "Faclon Labs",
+  "theme_color": "#2f4050",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

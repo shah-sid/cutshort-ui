@@ -1,0 +1,43 @@
+.desc-divider {
+    color: #2691b9;
+    font-size: 1.15rem;
+}
+
+.card .card-body {
+    padding: 1rem 15px 0 15px !important;
+}
+
+.card .card-body + .card-footer, .card .card-footer {
+    padding-top: 0 !important;
+    margin: 0 10px 5px 10px !important;
+    border-top: none;
+}
+
+::ng-deep mat-divider{
+    border-top-color: #52C3ED !important;
+}
+
+.title-text {
+    font-size: 1.4rem;
+}
+
+.title-icon {
+    font-size: 1.9rem;
+}
+
+.card {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.dash-icon{
+   width: 3rem;
+}
+@media (min-width: 1524px) {
+    .col-xxl-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 19.99% !important;
+        flex: 0 0 19.99% !important ;
+        max-width: 19.99% !important;
+    }
+}

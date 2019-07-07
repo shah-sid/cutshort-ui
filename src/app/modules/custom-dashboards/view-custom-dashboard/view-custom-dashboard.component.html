@@ -1,0 +1,42 @@
+<div class="main-content pb-3">
+  <div class="container-fluid animated fadeIn pt-3">
+    <div class="row" *ngIf="widgets && widgets.length > 0 && !isMobileDisplay()">
+      <div class="col-12" align="end">
+        <button mat-raised-button color="accent" class="text-white" (click)="toggleEditLayout()">{{ editLayoutState ? 'Save Widget Layout' : 'Edit Widget Layout'}}</button>
+      </div>
+    </div>
+    <div *ngIf="showWidgetsLoader === true; then widgetsLoader else playground"></div>
+    <ng-template #widgetsLoader>
+      <report-placeholder count="4"></report-placeholder>
+    </ng-template>
+    <ng-template #playground>
+      <ng-template #widgetHost *ngIf="widgets?.length > 0"></ng-template>
+      <div *ngIf="widgets?.length == 0">
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header card-header-icon card-header-primary">
+                <div class="card-icon">
+                  <i class="material-icons">widgets</i>
+                </div>
+                <h4 class="card-title">Custom Dashboard</h4>
+              </div>
+              <div class="card-body">
+                <h4 align="center"><span>No widgets found. Click on
+                    <button matTooltip="Add widget!" matTooltipPosition="left" mat-mini-fab
+                      (click)="addWidget($event)">
+                      <i class="material-icons text-white">add</i>
+                    </button>
+                    to add new widget!</span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <button matTooltip="Add widget!" matTooltipPosition="left" mat-fab class="btn btn-primary fab"
+      (click)="addWidget($event)">
+      <i class="material-icons text-white">add</i>
+    </button>
+  </div>
+</div>

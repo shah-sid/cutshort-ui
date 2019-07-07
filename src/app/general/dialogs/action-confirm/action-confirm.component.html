@@ -1,0 +1,16 @@
+<h4 mat-dialog-title>{{ title }}</h4>
+<div>
+  <div class="row">
+    <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2" align="center">
+      <img [src]="icon" alt="warning">
+    </div>
+    <div class="col-9 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+      <span>{{ messageLine1 }}</span><br>
+      <span *ngIf="messageLine2">{{ messageLine2 }}</span>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close class="btn btn-default btn-sm" [mat-dialog-close]="false">{{ cancelText }}</button>
+    <button mat-raised-button class="btn btn-primary btn-sm" type="submit" [mat-dialog-close]="true">{{ successText }}</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,124 @@
+<div class="main-content">
+    <div class="container-fluid animated fadeIn">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-primary">
+                        <div class="card-icon">
+                            <i class="material-icons">settings</i>
+                        </div>
+                        <h4 class="card-title">Configure line chart widget</h4>
+                    </div>
+                    <div class="card-body">
+							<form [formGroup]="chartConfigForm">
+									<div class="row">
+										<div class="col-12 col-md-6">
+											<mat-form-field>
+												<mat-label>Select Source</mat-label>
+												<mat-select formControlName="source"> <!--  (selectionChange)="onSelectedDeviceChanged()" -->
+													<mat-option *ngFor="let data of sourceData" [value]="data">
+														{{ data }}
+													</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
+										<div class="col-12 col-md-6">
+											<mat-form-field>
+												<input matInput placeholder="Chart Color" [value]="seriesColor"
+													[cpPosition]="isMobileDisplay() ? 'bottom' : 'left'" [cpOutputFormat]="'hex'"
+													[(colorPicker)]="seriesColor" />
+												<mat-hint>Enter hex value of desired color</mat-hint>
+											</mat-form-field>
+										</div>
+										<div class="col-12 col-md-6">
+											<mat-form-field>
+												<mat-label>Select Data Duration</mat-label>
+												<mat-select formControlName="dataDuration">
+													<mat-option *ngFor="let item of dataDurationOptions" [value]="item.value">
+														{{ item.viewValue }}
+													</mat-option>
+													<mat-error
+														*ngIf="chartConfigForm.get('dataDuration').touched && chartConfigForm.get('dataDuration').hasError('required')">
+														Data Duration is <strong>required</strong>.
+													</mat-error>
+												</mat-select>
+											</mat-form-field>
+										</div>
+										<div class="col-8 mt-3">
+											<h5>Select Widget Size</h5>
+										</div>
+										<div class="col-4 mt-2" align="end">
+											<button mat-stroked-button [matMenuTriggerFor]="menu"
+												color="primary">{{ _.find(widgetSizeOptions, {value: chartConfigForm.value.widgetSize }).viewValue }}</button>
+											<mat-menu #menu="matMenu">
+												<button *ngFor="let size of widgetSizeOptions" mat-menu-item
+													(click)="updateWidgetSize(size.value)">{{ size.viewValue }}</button>
+											</mat-menu>
+											<!-- <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="widgetSize">
+													<mat-button-toggle *ngFor="let size of widgetSizeOptions" [value]="size.value">
+														{{ size.viewValue }}
+													</mat-button-toggle>
+												</mat-button-toggle-group> -->
+										</div>
+										<div class="col-12 mt-md-3" align="center">
+											<button mat-raised-button color="accent" class="text-white" matTooltip="Add Sensor"
+												matTooltipPosition="below" (click)="addSource()"
+												>Add Source</button> <!-- [disabled]="chartConfigForm.get('selectedSensor').invalid" -->
+										</div>
+										<div class="col-12">
+											<div class="table-responsive">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th class="text-center">#</th>
+															<th class="text-center">Source Name</th>
+															<th class="text-center">Chart Color</th>
+															<th class="text-center">Data Duration</th>
+															<th class="text-center">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let item of sources; index as $index">
+															<td class="text-center">{{ $index + 1 }}</td>
+															<td class="text-center">{{ item.source }}</td>
+															<td class="text-center">
+																<a>
+																	<mat-icon [ngStyle]="{'color': item.color}">fiber_manual_record
+																	</mat-icon> {{ item.color }}
+																</a>
+															</td>
+															<td class="text-center">
+																{{ _.find(dataDurationOptions, {value: item.dataDuration})?.viewValue }}
+															</td>
+															<td class="text-center">
+																<button mat-icon-button color="warn" (click)="removeSource($index)"
+																	[disabled]="sources.length <= 1">
+																	<mat-icon>close</mat-icon>
+																</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</form>
+								<button class="pull-right mt-3" mat-raised-button color="primary"
+								(click)="buildConfig(chartConfigForm.value, true)"
+								[disabled]="sources.length == 0">{{ action == 'add' ? 'Add Widget' : 'Update Widget' }}</button>
+					
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12"
+                [ngClass]="{'col-md-6': chartConfigForm.value.widgetSize == 'S', 'col-md-9': chartConfigForm.value.widgetSize == 'M', 'col-md-12': chartConfigForm.value.widgetSize == 'L'}"
+                align="center" *ngIf="previewConfigOptions">
+                <column-chart [config]="previewConfigOptions"></column-chart>
+            </div>
+        </div>
+
+    </div>
+</div>

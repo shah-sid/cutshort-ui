@@ -1,0 +1,43 @@
+<div class="text-truncate" mat-dialog-title>{{ action == 'add' ? 'Add Custom Dashboard - ' : 'Edit Custom Dashboard - ' }}{{
+  customDashboard.name}}</div>
+<mat-dialog-content>
+  <form [formGroup]="customDashboardConfigForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Dashboard ID" formControlName="dashboardID">
+      <mat-error
+        *ngIf="customDashboardConfigForm.get('dashboardID').touched && customDashboardConfigForm.get('dashboardID').hasError('required')">
+        Dashboard Name is <strong>required.</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Dashboard Type" formControlName="type">
+      <mat-error
+        *ngIf="customDashboardConfigForm.get('type').touched && customDashboardConfigForm.get('type').hasError('required')">
+        Dashboard Type is <strong>required.</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Description" formControlName="description">
+      <mat-error
+        *ngIf="customDashboardConfigForm.get('description').touched && customDashboardConfigForm.get('description').hasError('required')">
+        Description is <strong>required.</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="demo-chip-list">
+      <mat-chip-list #tagsChipList>
+        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="removeTag(tag)">
+          {{ tag }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Tags" [matChipInputFor]="tagsChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          matChipInputAddOnBlur="true" (matChipInputTokenEnd)="addTag($event)" />
+      </mat-chip-list>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close class="btn btn-default btn-sm" [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button class="btn btn-primary btn-sm" [disabled]="customDashboardConfigForm.invalid"
+    (click)="buildCustomDashboard(customDashboardConfigForm.value)">{{
+    action == 'add' ? 'Submit' : 'Update' }}</button>
+</mat-dialog-actions>

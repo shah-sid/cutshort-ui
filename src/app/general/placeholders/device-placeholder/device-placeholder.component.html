@@ -1,0 +1,46 @@
+<div [ngSwitch]="view">
+  <div *ngSwitchCase="'grid'" class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" *ngFor="let count of cardCount">
+      <div class="card">
+        <div class="ph-item">
+          <div class="ph-col-2">
+            <div class="ph-avatar"></div>
+          </div>
+          <div>
+            <div class="ph-row">
+              <div class="ph-col-10"></div>
+              <div class="ph-col-2 empty"></div>
+              <div class="ph-col-8"></div>
+              <div class="ph-col-4 empty"></div>
+              <div class="ph-col-6"></div>
+              <div class="ph-col-6 empty"></div>
+              <div class="ph-col-8"></div>
+              <div class="ph-col-4 empty"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngSwitchCase="'compact'">
+    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-xl-2" *ngFor="let count of cardCount">
+      <div class="card">
+          <div class="ph-item">
+              <div class="ph-col-2">
+                <div class="ph-avatar"></div>
+              </div>
+              <div>
+                <div class="ph-row">
+                  <div class="ph-col-10"></div>
+                  <div class="ph-col-2 empty"></div>
+                  <div class="ph-col-8"></div>
+                  <div class="ph-col-4 empty"></div>
+                  <div class="ph-col-6"></div>
+                  <div class="ph-col-6 empty"></div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>

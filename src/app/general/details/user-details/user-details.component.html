@@ -1,0 +1,18 @@
+<div class="card card-profile">
+  <div class="card-avatar">
+    <a>
+      <img class="img" [src]="profilePicture" width="100"/>
+    </a>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">{{ user.userDetail.personalDetails.name.first }} {{ user.userDetail.personalDetails.name.last }}</h4>
+    <p class="card-description">
+      <b>{{ user.organisation.orgName }}</b>
+    </p>
+    <button href="javascript:;"
+            class="btn btn-success btn-round"
+            ngxFilePicker
+            accept="image/*"
+            (filePick)="getSelectedImage($event)">Change Picture</button>
+  </div>
+</div>

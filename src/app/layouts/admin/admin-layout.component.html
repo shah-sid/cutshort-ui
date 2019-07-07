@@ -1,0 +1,13 @@
+
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-background-color="blue" data-image="../assets/img/sidebar-1.jpg">
+        <app-sidebar-cmp></app-sidebar-cmp>
+    </div>
+    <div class="main-panel">
+        <app-navbar-cmp></app-navbar-cmp>
+        <router-outlet></router-outlet>
+        <div *ngIf="!isMap()">
+            <app-footer-cmp showBadge=true [user-org]="userOrganisation$ | async"></app-footer-cmp>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<footer class="footer">
+  <img matTooltip="Premium Account" matTooltipPosition="after" *ngIf="showBadge && !isDemoUser"
+    src="../../../assets/img/essentials/gold-medal.svg" alt="premium-account" class="account-type-badge">
+  <div>
+    <h6 class="mb-0 mt-1" *ngIf="showBadge && isDemoUser">Demo Account | Expires in: </h6>
+  </div>
+  <div class="container d-none d-sm-block">
+    <div class="copyright pull-left">
+      <a [href]="organisation?.url" target="_blank" *ngIf="orgHost?.indexOf('paulshantanu') == -1">{{ organisation?.name }}</a>
+      <a [href]="organisation?.url" target="_blank" *ngIf="orgHost?.indexOf('paulshantanu') != -1">Solution By Falcon LLP <br>Made at Faclon Labs.</a>
+    </div>
+    <div class="copyright pull-right" *ngIf="orgHost?.indexOf('paulshantanu') == -1">
+      &copy;
+      {{test | date: 'yyyy'}},
+      <a [href]="organisation?.url" target="_blank">{{ organisation?.poweredByText }}</a>
+    </div>
+    <div class="copyright pull-right" *ngIf="orgHost?.indexOf('paulshantanu') != -1">
+      &copy;
+      {{test | date: 'yyyy'}},
+      <a [href]="organisation?.url" target="_blank">Paul Shantanu Engineering Pvt. Ltd.</a>
+    </div>
+  </div>
+  <div class="container d-block d-sm-none">
+    <div>
+      <a [href]="organisation?.url" target="_blank">{{ organisation?.name }}</a>
+    </div>
+    <div>
+      <a [href]="organisation?.url" target="_blank" *ngIf="orgHost?.indexOf('paulshantanu') == -1">&copy;{{test | date: 'yyyy'}}, {{ organisation?.poweredByText }}</a>
+      <a [href]="organisation?.url" target="_blank" *ngIf="orgHost?.indexOf('paulshantanu') != -1">&copy;{{test | date: 'yyyy'}}, Paul Shantanu Engineering Pvt.
+        Ltd.</a>
+    </div>
+  </div>
+</footer>

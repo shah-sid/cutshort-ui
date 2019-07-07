@@ -1,0 +1,18 @@
+<h4 mat-dialog-title>Edit Image</h4>
+<mat-dialog-content>
+  <image-cropper
+    [imageBase64]="selectedImage"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="512"
+    [imageQuality]="80"
+    format="jpeg"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close class="btn btn-default btn-sm" [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button class="btn btn-primary btn-sm" type="submit" [mat-dialog-close]="croppedImage">Upload</button>
+</mat-dialog-actions>

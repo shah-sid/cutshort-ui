@@ -1,0 +1,16 @@
+<div class="main-content">
+    <div class="container-fluid animated fadeIn">
+        <div class="row">
+            <div class="col-12">
+                <custom-dashboards-list [custom-dashboards-list]="customDashboards$ | async"
+                                        (onCustomDashboardDelete)="deleteCustomDashboard($event)"
+                                        (onCustomDashboardConfig)="showConfig($event)"
+                                        (onCustomDashboardView)="viewCustomDashboard($event)">
+                                    </custom-dashboards-list>
+            </div>
+        </div>
+        <button matTooltip="Add Custom Dashboard!" matTooltipPosition="left" mat-fab class="btn btn-primary fab"
+            (click)="addDashboard($event)">
+            <i class="material-icons text-white">add</i></button>
+    </div>
+</div>
